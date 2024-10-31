@@ -1,6 +1,5 @@
 package lat.pam.utsproject
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,7 +7,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class FoodAdapter(private val foodList: List<Food>) : RecyclerView.Adapter<FoodAdapter.FoodViewHolder>() {
+class FoodAdapter(
+    private var foodList: List<Food>,
+    private val onFoodClickListener: (Food) -> Unit
+) : RecyclerView.Adapter<FoodAdapter.FoodViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FoodViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_layout_food, parent, false)
@@ -21,12 +23,8 @@ class FoodAdapter(private val foodList: List<Food>) : RecyclerView.Adapter<FoodA
         holder.foodDescription.text = food.description
         holder.foodImage.setImageResource(food.imageResourceId)
 
-        // Ketika item di klik, kirim data ke OrderActivity
-        holder.itemView.setOnClickListener {
-            val intent = Intent(it.context, OrderActivity::class.java).apply {
-                putExtra("foodName", food.name)
-            }
-            it.context.startActivity(intent)
+        holder.itemView.setOnClickListener { // Set click listener on the entire item view
+            onFoodClickListener(food) // Call the provided function with the selected food
         }
     }
 
@@ -38,5 +36,10 @@ class FoodAdapter(private val foodList: List<Food>) : RecyclerView.Adapter<FoodA
         val foodImage: ImageView = itemView.findViewById(R.id.foodImage)
         val foodName: TextView = itemView.findViewById(R.id.foodName)
         val foodDescription: TextView = itemView.findViewById(R.id.foodDescription)
+    }
+
+    fun updateFoodList(newList: List<Food>) {
+        foodList = newList
+        notifyDataSetChanged()
     }
 }

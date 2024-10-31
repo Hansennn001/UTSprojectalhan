@@ -1,8 +1,20 @@
 <resources>
     <string name="app_name">UTSproject</string>
+    <string name="welcome">Welcome to AHAZA FOOD!</string>
     <string name="hint_username">Username</string>
     <string name="hint_password">Password</string>
-    <string name="login">Login\n</string>
-    <string name="register">Register Here</string>
-    <string name="food_list_title">Food and Beverages</string>
+    <string name="login">Masuk\n</string>
+    <string name="register">Daftar Disini</string>
+    <string name="food_list_title">Menu AHAZA</string>
+    <string name="city_label_string">Kota</string>
+    <string name="selected_item" />
+    <string name="show"/>
+    <string-array name="cities_array">
+        <item>Jakarta</item>
+        <item>Bandung</item>
+        <item>Cimahi</item>
+        <item>Sumedang</item>
+        <item>Sukabumi</item>
+        <item>Bandung Barat</item>
+        </string-array>
 </resources>

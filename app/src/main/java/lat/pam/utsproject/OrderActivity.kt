@@ -2,9 +2,14 @@ package lat.pam.utsproject
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Spinner
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -19,6 +24,33 @@ class OrderActivity : AppCompatActivity() {
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
+        }
+
+        val cities = resources.getStringArray(R.array.cities_array)
+        val spinner = findViewById<Spinner>(R.id.cities_spinner)
+
+        if (spinner != null) {
+            val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, cities)
+            spinner.adapter = adapter
+
+            spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View,
+                    position: Int,
+                    id: Long
+                ) {
+                    Toast.makeText(
+                        this@OrderActivity,
+                        getString(R.string.selected_item) + " " + cities[position],
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+                    // Tidak perlu implementasi jika tidak ada yang dipilih
+                }
+            }
         }
 
         // Mengambil data dari ListFoodActivity
@@ -47,7 +79,7 @@ class OrderActivity : AppCompatActivity() {
         }
 
         // Inisialisasi tombol untuk kembali ke ListFoodActivity
-        val backToListButton: Button = findViewById(R.id.backToList) // Pastikan ID sesuai dengan layout XML
+        val backToListButton: Button = findViewById(R.id.backToList)
         backToListButton.setOnClickListener {
             // Kembali ke ListFoodActivity
             val intent = Intent(this, ListFoodActivity::class.java)

@@ -65,7 +65,17 @@
             android:hint="Masukkan nama pemesan"
             android:padding="12dp"
             android:layout_marginBottom="16dp"/>
-
+        <TextView
+            android:id="@+id/city_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/city_label_string"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/address_text" />
+        <Spinner
+            android:id="@+id/cities_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
         <!-- Input Catatan Tambahan -->
         <TextView
@@ -73,7 +83,8 @@
             android:layout_height="wrap_content"
             android:text="Catatan Tambahan"
             android:textSize="18sp"
-            android:layout_marginBottom="8dp"/>
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="10dp"/>
         <EditText
             android:id="@+id/etNotes"
             android:layout_width="match_parent"
